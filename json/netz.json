@@ -1,0 +1,9 @@
+{
+    "name":"Netzgerät",
+    "video":"./videos/netz.mp4",
+    "workshops":[
+        "Dreherei",
+        "Mechanische Grundausbildung",
+        "Elektronische Grundausbildung"
+    ]
+}

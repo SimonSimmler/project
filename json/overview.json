@@ -1,0 +1,14 @@
+{
+    "headline":"Übersicht",
+    "items":
+        [
+            {
+                "name":"Lötkolbenhalter",
+                "json":"lkh.json"
+            },
+            {
+                "name":"Netzgerät",
+                "json":"netz.json"
+            }
+        ]
+}
