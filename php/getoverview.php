@@ -1,5 +1,5 @@
 <?php
-    // Datenbankanbindung machen und SQL Abfragen abschicken ...
+/*    // Datenbankanbindung machen und SQL Abfragen abschicken ...
 
     echo "{"
 
@@ -23,5 +23,46 @@
 
     echo "]"
     echo "}"
+*/
+
+function data_connect(){
+
+      //Verbindung zur Datenbank aufbauen
+      $db = mysqli_connect("localhost", "root", "root", "Vernetzung");
+
+      if(!$db){
+        echo "Verbindungsaufbau zur DB nicht möglich";
+        exit();
+      }
+
+
+      //Zeichenkodierung setzen
+      if(!mysqli_set_charset($db, "utf8")){
+        echo "Beim setzen der Zeichenkodierung ist ein Fehler aufgetreten.";
+        exit();
+      }
+
+      $sql = "SELECT name FROM item";
+
+      $result = mysqli_query($db, $sql);
+      if(!$result){
+        echo "Bei der Abfrage ist ein Fehler aufgetreten.";
+        exit();
+      }
+
+
+      while($zeile = mysqli_fetch_assoc($result)){
+        $data[] = array(
+          "name"  => $zeile["name"]
+
+        );
+      }
+      return json_encode($data);
+
+}
+echo "<pre>";
+echo data_connect();
+echo "</pre>";
+
 
 ?>
