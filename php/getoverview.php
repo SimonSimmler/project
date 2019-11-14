@@ -42,7 +42,7 @@ function data_connect(){
         exit();
       }
 
-      $sql = "SELECT name FROM item";
+      $sql = "SELECT name, id FROM item";
 
       $result = mysqli_query($db, $sql);
       if(!$result){
@@ -53,16 +53,17 @@ function data_connect(){
 
       while($zeile = mysqli_fetch_assoc($result)){
         $data[] = array(
-          "name"  => $zeile["name"]
+          "name"  => $zeile["name"],
+          "id"    => $zeile["id"]
 
         );
       }
       return json_encode($data);
 
 }
-echo "<pre>";
+
 echo data_connect();
-echo "</pre>";
+
 
 
 ?>

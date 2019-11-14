@@ -13,7 +13,7 @@ $(document).ready(function(){
 
         //console.log ( data['headline'] );
 
-        $("#content").append("<h1>"+Übersich+"</h1>");
+        //$("#content").append("<h1>"+Übersicht+"</h1>");
 
         // Über alle Items
         $.each( data.items, function( key, val ) {
