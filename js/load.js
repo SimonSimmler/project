@@ -16,7 +16,7 @@ function startRequest(){
 function behandleAntwort(){
 
   if(anfrage.status == 200){
-    
+
 
     $("#content").prepend("<h1>"+"Übersicht"+"</h1>");
     //var div = document.getElementById("content");
@@ -35,10 +35,10 @@ function behandleAntwort(){
               var url = "./php/getItem.php" + "?id=" + val.id;
               console.log(url);
 
-              anfrage.open("GET", "./php/getoverview.php", true);
+              anfrage2.open("GET", url, true);
 
 
-              anfrage.onload = function(){
+              anfrage2.onload = function(){
                 $.getJSON( url, function( data ) {
 
                   //alert("Test1")
@@ -46,7 +46,7 @@ function behandleAntwort(){
 
                 });
               }
-              anfrage.send(null);
+              anfrage2.send(null);
 
 
             });
