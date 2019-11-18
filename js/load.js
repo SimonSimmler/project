@@ -1,10 +1,12 @@
 var anfrage = new XMLHttpRequest();
+var anfrage2 = new XMLHttpRequest();
 
 window.onload = function(){
   startRequest();
 }
 function startRequest(){
   anfrage.open("GET", "./php/getoverview.php", true);
+
 
   anfrage.onload = function(){
     behandleAntwort();
@@ -14,9 +16,9 @@ function startRequest(){
 function behandleAntwort(){
 
   if(anfrage.status == 200){
-    //alert(anfrage.responseText);
+    
 
-    $("#content").append("<h1>"+"Übersicht"+"</h1>");
+    $("#content").prepend("<h1>"+"Übersicht"+"</h1>");
     //var div = document.getElementById("content");
     //div.innerHTML += anfrage.responseText;
 
@@ -24,32 +26,31 @@ function behandleAntwort(){
         //showOverview(data);
         $.each( data, function( key, val ) {
 
-            $("#content").append ("<div id='"+val.id+"' '>Item:" + val.name + "</div>");
-            /*
-              $.getJSON( "./php/getItem.php"), function( data ) {
-                  updateContent(data);
-              });
-    });*/
+            $("#form").append("<div id='"+val.id+"' ' name='"+val.name+"'>Item:" + val.name + "</div>");
+            //Der Nachfolgende Code ist nur bedingt fertig
+
+            $("#"+val.id).click(function(){
 
 
-    // Zeigt die Übersicht über die Werkstücke an
-    //function showOverview(data){
+              var url = "./php/getItem.php" + "?id=" + val.id;
+              console.log(url);
 
-        //console.log ( data['headline'] );
+              anfrage.open("GET", "./php/getoverview.php", true);
 
-        //$("#content").append("<h1>"+Übersicht+"</h1>");
 
-        // Über alle Items
-        //$.each( data, function( key, val ) {
+              anfrage.onload = function(){
+                $.getJSON( url, function( data ) {
 
-            //$("#content").append ("<div id='"+val.id+"' '>Item:" + val.name + "</div>");
-            //$("#"+val.name).click(function(){
-
-                /*$.getJSON( "./json/" + $(this).attr("json"), function( data ) {
+                  //alert("Test1")
                     updateContent(data);
-                });*/
+
+                });
+              }
+              anfrage.send(null);
+
 
             });
+    });
 
         });
 
@@ -59,4 +60,19 @@ function behandleAntwort(){
   else{
     alert("problem");
   }
+}
+function updateContent(data){
+    //alert("Test");
+
+    $("#detail").html("");
+
+    var items = [];
+    $.each( data, function( key, val ) {
+      items.push( "<li id='" + val.id + "'>" +"Text: "+ val.text + "</li>" + "<li>" + "Video: "+ val.video + "</li>" );
+    });
+
+    $( "<ul/>", {
+      "class": "my-new-list",
+      html: items.join( "" )
+  }).appendTo( "#detail" );
 }
