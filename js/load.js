@@ -68,7 +68,7 @@ function updateContent(data){
 
     var items = [];
     $.each( data, function( key, val ) {
-      items.push( "<li id='" + val.id + "'>" +"Text: "+ val.text + "</li>" + "<li>" + "Video: "+ val.video + "</li>" );
+      items.push( "<li id='" + val.id + "'>" +"Text: "+ val.text + "</li>" + "<li>" + "Video: "+ val.video + "</li>" + "<li>" + "Division: "+ val.division + "</li>" );
     });
 
     $( "<ul/>", {

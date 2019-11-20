@@ -19,8 +19,11 @@ function data_connect(){
       }
       $id = $_GET["id"];
 
-      $sql = "SELECT text, video FROM item WHERE id=$id";
-
+      $sql = "SELECT item.text, item.video, division.name FROM item JOIN division_to_item ON item.id = division_to_item.iditem JOIN division ON division.id = division_to_item.iddivision WHERE item.id = $id";
+      //für Abteilungen:
+      //SELECT item.name, item.text, item.video, division.name FROM item JOIN division_to_item ON item.id = division_to_item.iditem JOIN division ON division.id = division_to_item.iddivision
+      //für spezifische ID:
+      //SELECT item.name, item.text, item.video, division.name FROM item JOIN division_to_item ON item.id = division_to_item.iditem JOIN division ON division.id = division_to_item.iddivision WHERE item.id = $id
       $result = mysqli_query($db, $sql);
       if(!$result){
         echo "Bei der Abfrage ist ein Fehler aufgetreten.";
@@ -31,7 +34,8 @@ function data_connect(){
       while($zeile = mysqli_fetch_assoc($result)){
         $data[] = array(
           "text"  => $zeile["text"],
-          "video" => $zeile["video"]
+          "video" => $zeile["video"],
+          "division" => $zeile["name"]
 
         );
       }
